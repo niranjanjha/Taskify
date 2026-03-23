@@ -1,233 +1,299 @@
-# Taskify - Task Management Application
+# 🚀 Taskify: AI Group Project Manager
 
-Taskify is a modern task management application built with the MERN stack (MongoDB, Express.js, React, Node.js). It supports individuals and teams with tasks, assignments, reminders, optional face login, real-time video/chat signaling, and an **AI layer** powered by **Hindsight** (memory) and **Groq** (LLM).
+Taskify is an **AI-powered group project management system** that goes beyond traditional task trackers. Instead of just storing tasks, Taskify **learns how teams work over time** and provides intelligent suggestions using memory-driven AI.
 
-## Features
+Built with the **MERN stack** and enhanced with **Hindsight (agent memory)** and **Groq (LLM)**, Taskify helps teams collaborate smarter, reduce delays, and improve productivity automatically.
 
-### Core task management
-- User authentication (register / login) with JWT
-- User roles: **`user`** and **`superuser`** (JWT includes `role`; use CLI to create a superuser)
-- Create, read, update, and delete tasks
-- Task prioritization (Low, Medium, High)
-- Due date tracking and filters (e.g. today, week, by priority)
-- Subtask management with completion sync to parent tasks
-- Multi-user **task assignment** with roles (e.g. Member)
-- Task detail view, delete confirmation, and assignment-aware UI (“Assigned to you”)
-- Progress and stats on the dashboard
+---
 
-### AI assistant (Hindsight + Groq)
-- **Memory bank** per user via [Hindsight](https://hindsight.vectorize.io) (`retain` / `recall`) — task creation, completion, and assignments are stored as memories when APIs succeed
-- **Groq** LLM for generation and analysis (model configurable via `GROQ_MODEL`)
-- Dashboard **AI assistant** panel: suggestions, deadline insights, team risk / inactive insights, meeting summarize, extract tasks from meeting text, smart assignment hints, team roles saved to memory, and project chat
-- REST API under `/api/ai/*` (authenticated)
+## 🧠 What Makes Taskify Different?
 
-### Collaboration & real-time
-- **Socket.IO** server for video-call signaling (WebRTC offer/answer/ICE) and in-room messaging hooks (`videoCallService`)
-- Optional verbose socket logging via `DEBUG_SOCKET_IO=true`
+Most task managers only track work.
 
-### Authentication extras
-- **Face registration / face login** (face descriptors stored on the user model; see `/api/face`)
+**Taskify learns from it.**
 
-### Other modules
-- **Todo / doodle** CRUD API (`/api/todos`) for the todo feature in the app
+* Remembers past task outcomes
+* Identifies delay patterns
+* Suggests better task assignments
+* Generates insights from team behavior
 
-### Email
-- Welcome email on registration
-- Scheduled **deadline reminders** (tasks and subtasks due within a window; cron-driven)
+This is powered by **persistent agent memory** using Hindsight.
 
-### UX
-- Responsive layout (Tailwind), icons (Lucide), custom dropdowns and modals
+👉 Learn more about memory system:
 
-## Tech Stack
+* [https://vectorize.io/features/agent-memory](https://vectorize.io/features/agent-memory)
+* [https://hindsight.vectorize.io/](https://hindsight.vectorize.io/)
+* [https://github.com/vectorize-io/hindsight](https://github.com/vectorize-io/hindsight)
+
+---
+
+## ✨ Features
+
+### 📌 Core Task Management
+
+* User authentication (JWT-based login/register)
+* Role-based access (**User / Superuser**) 
+* Create, update, delete tasks
+* Task priority (Low, Medium, High)
+* Due date tracking & filters
+* Subtasks with progress sync
+* Multi-user task assignment
+
+---
+
+### 🤖 AI Assistant (Hindsight + Groq)
+
+* Memory-based task suggestions
+* Deadline risk prediction
+* Smart task assignment recommendations
+* Meeting summarization
+* Extract tasks from meeting text
+* Team activity insights (inactive members, overload detection)
+
+👉 Every important action (task creation, completion, assignment) is stored as memory and reused later 
+
+---
+
+### ⚡ Real-Time Collaboration
+
+* Socket.IO for real-time communication
+* Video call signaling (WebRTC)
+* Live interaction between team members 
+
+---
+
+### 🔐 Advanced Authentication
+
+* Face registration & login system
+* Secure password hashing (bcrypt)
+* JWT-based session management 
+
+---
+
+### 📧 Automation
+
+* Welcome emails on signup
+* Automatic deadline reminders (cron-based) 
+
+---
+
+## 🏗️ Tech Stack
 
 ### Frontend
-- React.js
-- React Router
-- Tailwind CSS
-- Axios
-- Lucide React
-- Vite
-- Recharts (where used in UI)
+
+* React.js (Vite)
+* Tailwind CSS
+* Axios
+* Recharts
 
 ### Backend
-- Node.js (ES modules)
-- Express.js
-- MongoDB with Mongoose
-- JWT authentication
-- bcryptjs for passwords
-- Nodemailer + node-cron (reminders)
-- Socket.IO (video / signaling)
-- **Groq SDK** — LLM calls
-- **@vectorize-io/hindsight-client** — Hindsight memory API
 
-## Getting Started
+* Node.js + Express.js
+* MongoDB (Mongoose)
+* JWT Authentication
+* Socket.IO
+* Nodemailer + Cron
 
-### Prerequisites
+### AI Layer
 
-- Node.js (v18+ recommended)
-- MongoDB (Atlas or local)
-- For AI features: Hindsight API key and Groq API key
-- Gmail + app password (if using email features)
+* **Hindsight** → Memory system
+* **Groq** → LLM processing
 
-### Installation
+---
 
-1. Clone the repository and enter the project folder.
+## ⚙️ System Architecture
 
-2. Install backend dependencies:
+```
+User Actions (Tasks, Updates)
+        ↓
+Backend (Express API)
+        ↓
+Event Storage → Hindsight Memory
+        ↓
+Agent Layer (Groq LLM)
+        ↓
+AI Suggestions (Dashboard)
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Taskify/
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── scripts/
+│   └── server.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── App.jsx
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd Taskify
+```
+
+---
+
+### 2️⃣ Install dependencies
+
+Backend:
+
 ```bash
 cd backend
 npm install
 ```
 
-3. Install frontend dependencies:
+Frontend:
+
 ```bash
 cd ../frontend
 npm install
 ```
 
-### Environment variables
+---
 
-Create a `backend/.env` file. See `backend/.env.example` for AI-related keys. Typical variables:
+### 3️⃣ Setup environment variables
+
+Create `backend/.env`:
 
 ```env
 PORT=4000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_strong_jwt_secret
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret
 
-# Email (welcome + reminders)
-EMAIL_USER=your_gmail@gmail.com
-EMAIL_PASS=your_gmail_app_password
-
-# AI (optional but required for AI routes / dashboard assistant)
+# AI
 HINDSIGHT_API_KEY=
 HINDSIGHT_BASE_URL=https://api.hindsight.vectorize.io
 GROQ_API_KEY=
 GROQ_MODEL=llama-3.3-70b-versatile
 
-# Optional: log Socket.IO connect/signaling (default: off)
-# DEBUG_SOCKET_IO=true
+# Email
+EMAIL_USER=your_email
+EMAIL_PASS=your_app_password
 ```
 
-For Gmail / app passwords, see `backend/EMAIL_SETUP.md`.
+---
 
-### Create a superuser
+### 4️⃣ Run the project
 
-From `backend`:
+Backend:
 
 ```bash
-npm run create-superuser -- you@example.com "YourPassword12!" "Your Name"
-```
-
-If the email already exists, the account is promoted to `superuser` and the password is updated.
-
-### Running the application
-
-1. Start the API (either command works):
-```bash
-cd backend
-npm run dev
-# or: npm start
-```
-
-2. Start the frontend:
-```bash
-cd ../frontend
 npm run dev
 ```
 
-3. Open the app at the URL Vite prints (commonly `http://localhost:5173`). The API defaults to `http://localhost:4000` (see frontend API base URLs in pages/components if you change the port).
+Frontend:
 
-## Email behavior
-
-- **Welcome email** after successful registration  
-- **Deadline reminders** for tasks/subtasks approaching due time (hourly cron)
-
-## Project structure (overview)
-
-```
-Taskify/
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── scripts/          # e.g. createSuperuser.js
-│   ├── services/         # email, AI, video/socket, reminders
-│   ├── .env
-│   └── server.js
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── App.jsx
-│   └── index.html
-└── README.md
+```bash
+npm run dev
 ```
 
-## API overview
+---
 
-All private routes expect `Authorization: Bearer <token>` unless noted.
+## 🤖 How AI Learning Works
 
-### User (`/api/user`)
-| Method | Path | Auth |
-|--------|------|------|
-| POST | `/register` | No |
-| POST | `/login` | No |
-| GET | `/me` | Yes |
-| PUT | `/profile` | Yes |
-| PUT | `/password` | Yes |
+Taskify doesn’t “guess” — it **learns from history**:
 
-Responses include `user.role` where applicable; JWT payload includes `role`.
+Example memory stored:
 
-### Tasks (`/api/tasks`)
-| Method | Path | Notes |
-|--------|------|--------|
-| GET/POST | `/gp` | List / create tasks |
-| GET/PUT/DELETE | `/:id/gp` | Single task |
-| POST | `/assign` | Assign user to task |
-| POST | `/remove` | Remove assignee |
-| … | `/subtasks` … | Subtask CRUD |
-| GET | `/users` | List users for assignment |
+```json
+{
+  "task": "Fix API Bug",
+  "assignedTo": "UserA",
+  "result": "delayed",
+  "reason": "unclear requirements"
+}
+```
 
-### Todos (`/api/todos`)
-| Method | Path |
-|--------|------|
-| GET/POST | `/gp` |
-| GET/PUT/DELETE | `/:id/gp` |
+Later, the agent can:
 
-### Face (`/api/face`)
-| Method | Path | Auth |
-|--------|------|------|
-| POST | `/register` | Yes |
-| POST | `/login` | No |
-| GET | `/check` | Yes |
+* Predict delays
+* Suggest reassignment
+* Improve planning decisions
 
-### AI (`/api/ai`)
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/suggestions` | AI suggestions from memory + Groq |
-| POST | `/summarize` | Body: `{ "text" }` — meeting summary; stored in Hindsight |
-| POST | `/suggest-assignment` | Body: `{ "task" }` |
-| GET | `/deadline-insights` | Deadline-focused insights |
-| POST | `/chat` | Body: `{ "message" }` — project chat |
-| GET | `/inactive-insights` | Team / workload risk heuristics |
-| POST | `/extract-meeting-tasks` | Body: `{ "text" }` — structured task ideas |
-| POST | `/team-roles` | Body: `{ "roles" }` — save roles to memory |
+---
 
-## Contributing
+## 📊 Example Use Case
 
-1. Fork the repository  
-2. Create a feature branch (`git checkout -b feature/YourFeature`)  
-3. Commit your changes  
-4. Push and open a pull request  
+### Before AI
 
-## License
+* Tasks assigned manually
+* Delays discovered late
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file if included.
+### After Taskify AI
 
-## Support
+* Predicts delays early
+* Suggests better assignments
+* Highlights risky tasks
 
-Open an issue in the repository or contact the maintainers.
+---
+
+## 📌 API Overview
+
+### Auth
+
+* `/api/user/register`
+* `/api/user/login`
+
+### Tasks
+
+* `/api/tasks/gp`
+* `/api/tasks/:id/gp`
+* `/api/tasks/assign`
+
+### AI
+
+* `/api/ai/suggestions`
+* `/api/ai/chat`
+* `/api/ai/summarize`
+
+---
+
+## 🧪 Future Improvements
+
+* Smarter learning (pattern weighting, decay)
+* Better explainability (“why this suggestion?”)
+* Advanced team analytics dashboard
+* Mobile app support
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create a branch
+3. Make changes
+4. Submit PR
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 💡 Final Thought
+
+Taskify started as a simple task manager.
+
+It became something more:
+
+A system that doesn’t just track work —
+but **learns how your team works and improves it over time.**
+
