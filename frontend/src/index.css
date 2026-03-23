@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* Custom yellow color for medium priority - Modern Amber */
+.bg-yellow-custom {
+  background-color: #fef3c7;
+}
+
+.text-yellow-custom {
+  color: #d97706;
+}
+
+.border-yellow-custom {
+  border-color: #fcd34d;
+}
+
+/* Face recognition video and canvas styles */
+.face-video {
+  display: block !important;
+  background-color: #000 !important;
+  z-index: 1 !important;
+}
+
+.face-canvas {
+  display: block !important;
+  z-index: 10 !important;
+}
+
+/* Fade in animation for dropdowns */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Text truncation for dropdowns */
+.dropdown-text-truncate {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Spotlight animation */
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
+
+.animate-spotlight {
+  animation: spotlight 2s ease .75s 1 forwards;
+}

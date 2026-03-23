@@ -1,0 +1,36 @@
+/* Zen Space Page Specific Styles */
+
+.zen-timer-display {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+}
+
+.zen-session-indicator.work {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+}
+
+.zen-session-indicator.break {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.zen-preset-button.active {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+  color: white;
+  border: none;
+}
+
+.zen-preset-button.break-active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+}
+
+.zen-tip-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.zen-tip-item:hover {
+  transform: translateX(5px);
+}
